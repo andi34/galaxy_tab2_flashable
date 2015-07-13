@@ -1,0 +1,17 @@
+ui_print(" ");
+ui_print(" ############################ ");
+ui_print(" Camera Fix for custom Kernel ");
+ui_print("     by Android-Andi @ XDA    ");
+ui_print(" ############################ ");
+ui_print(" ");
+ui_print(" ");
+run_program("/sbin/mount", "/dev/block/mmcblk0p9", "/system");
+show_progress(1, 15);
+delete("/system/lib/hw/camera.vendor.piranha.so");
+symlink("/system/lib/hw/vendor-camera.piranha.so", "/system/lib/hw/camera.vendor.piranha.so");
+run_program("/sbin/unmount", "/dev/block/mmcblk0p9", "/system");
+ui_print(" ");
+ui_print(" ");
+ui_print("Done!");
+ui_print(" ");
+ui_print(" ");
