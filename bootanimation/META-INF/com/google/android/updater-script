@@ -1,0 +1,16 @@
+ui_print("***********************************************");
+ui_print("            CM12 Bootanimation                 ");
+ui_print("                                               ");
+ui_print("       flashable ZIP by Deltadroid @ XDA       ");
+ui_print("***********************************************");
+
+ui_print("Installing files.");
+run_program("/sbin/busybox", "mount", "/system");
+show_progress(1, 15);
+package_extract_dir("system", "/system");
+show_progress(1, 15);
+ui_print("Setting metadata.");
+set_metadata_recursive("/system/addon.d", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/media/bootanimation.zip", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+run_program("/sbin/busybox", "umount", "/system");
+ui_print("Done.");
