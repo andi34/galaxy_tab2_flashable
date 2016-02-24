@@ -1,5 +1,5 @@
 ui_print("***********************************************");
-ui_print("           Closed Source Sensor blobs          ");
+ui_print("             OpenSource Sensor blobs           ");
 ui_print("                                               ");
 ui_print("***********************************************");
 
