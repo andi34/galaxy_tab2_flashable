@@ -4,6 +4,7 @@ ui_print("                                               ");
 ui_print("***********************************************");
 
 assert(getprop("ro.product.device") == "espresso" || getprop("ro.build.product") == "espresso" ||
+    getprop("ro.product.device") == "espresso-common" || getprop("ro.build.product") == "espresso-common" ||
     getprop("ro.product.device") == "p5100" || getprop("ro.build.product") == "p5100" ||
     getprop("ro.product.device") == "GT-P5100" || getprop("ro.build.product") == "GT-P5100" ||
     getprop("ro.product.device") == "espresso10rf" || getprop("ro.build.product") == "espresso10rf" ||
