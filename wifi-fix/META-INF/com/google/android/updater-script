@@ -1,0 +1,37 @@
+ui_print(" ");
+ui_print(" ############################ ");
+ui_print(" WiFi Fix for custom Kernel ");
+ui_print("     by Android-Andi @ XDA    ");
+ui_print(" ############################ ");
+ui_print(" ");
+ui_print(" ");
+assert(getprop("ro.product.device") == "espresso-common" || getprop("ro.build.product") == "espresso-common" ||
+    getprop("ro.product.device") == "p3100" || getprop("ro.build.product") == "p3100" ||
+    getprop("ro.product.device") == "GT-P3100" || getprop("ro.build.product") == "GT-P3100" ||
+    getprop("ro.product.device") == "espressorf" || getprop("ro.build.product") == "espressorf" ||
+    getprop("ro.product.device") == "espressorfxx" || getprop("ro.build.product") == "espressorfxx" ||
+    getprop("ro.product.device") == "p3110" || getprop("ro.build.product") == "p3110" ||
+    getprop("ro.product.device") == "GT-P3110" || getprop("ro.build.product") == "GT-P3110" ||
+    getprop("ro.product.device") == "espressowifi" || getprop("ro.build.product") == "espressowifi" ||
+    getprop("ro.product.device") == "espressowifixx" || getprop("ro.build.product") == "espressowifixx" ||
+    getprop("ro.product.device") == "p5100" || getprop("ro.build.product") == "p5100" ||
+    getprop("ro.product.device") == "GT-P5100" || getprop("ro.build.product") == "GT-P5100" ||
+    getprop("ro.product.device") == "espresso10rf" || getprop("ro.build.product") == "espresso10rf" ||
+    getprop("ro.product.device") == "espresso10rfxx" || getprop("ro.build.product") == "espresso10rfxx" ||
+    getprop("ro.product.device") == "p5110" || getprop("ro.build.product") == "p5110" ||
+    getprop("ro.product.device") == "GT-P5110" || getprop("ro.build.product") == "GT-P5110" ||
+    getprop("ro.product.device") == "p5113" || getprop("ro.build.product") == "p5113" ||
+    getprop("ro.product.device") == "GT-P5113" || getprop("ro.build.product") == "GT-P5113" ||
+    getprop("ro.product.device") == "espresso10wifi" || getprop("ro.build.product") == "espresso10wifi" ||
+    getprop("ro.product.device") == "espresso10wifixx" || getprop("ro.build.product") == "espresso10wifixx");
+
+run_program("/sbin/mount", "/dev/block/mmcblk0p9", "/system");
+show_progress(1, 15);
+delete("/system/lib/modules/bcmdhd.ko");
+symlink("/system/lib/modules/dhd.ko", "/system/lib/modules/bcmdhd.ko");
+run_program("/sbin/unmount", "/dev/block/mmcblk0p9", "/system");
+ui_print(" ");
+ui_print(" ");
+ui_print("Done!");
+ui_print(" ");
+ui_print(" ");
