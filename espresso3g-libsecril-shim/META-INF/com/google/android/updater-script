@@ -1,0 +1,35 @@
+ui_print("***********************************************");
+ui_print("             RIL Shim Update(s)                ");
+ui_print("                                               ");
+ui_print("***********************************************");
+
+assert(getprop("ro.product.device") == "espresso" || getprop("ro.build.product") == "espresso" ||
+    getprop("ro.product.device") == "espresso-common" || getprop("ro.build.product") == "espresso-common" ||
+    getprop("ro.product.device") == "p3100" || getprop("ro.build.product") == "p3100" ||
+    getprop("ro.product.device") == "GT-P3100" || getprop("ro.build.product") == "GT-P3100" ||
+    getprop("ro.product.device") == "espressorf" || getprop("ro.build.product") == "espressorf" ||
+    getprop("ro.product.device") == "espressorfxx" || getprop("ro.build.product") == "espressorfxx" ||
+    getprop("ro.product.device") == "p3110" || getprop("ro.build.product") == "p3110" ||
+    getprop("ro.product.device") == "GT-P3110" || getprop("ro.build.product") == "GT-P3110" ||
+    getprop("ro.product.device") == "espressowifi" || getprop("ro.build.product") == "espressowifi" ||
+    getprop("ro.product.device") == "espressowifixx" || getprop("ro.build.product") == "espressowifixx" ||
+    getprop("ro.product.device") == "p5100" || getprop("ro.build.product") == "p5100" ||
+    getprop("ro.product.device") == "GT-P5100" || getprop("ro.build.product") == "GT-P5100" ||
+    getprop("ro.product.device") == "espresso10rf" || getprop("ro.build.product") == "espresso10rf" ||
+    getprop("ro.product.device") == "espresso10rfxx" || getprop("ro.build.product") == "espresso10rfxx" ||
+    getprop("ro.product.device") == "p5110" || getprop("ro.build.product") == "p5110" ||
+    getprop("ro.product.device") == "GT-P5110" || getprop("ro.build.product") == "GT-P5110" ||
+    getprop("ro.product.device") == "p5113" || getprop("ro.build.product") == "p5113" ||
+    getprop("ro.product.device") == "GT-P5113" || getprop("ro.build.product") == "GT-P5113" ||
+    getprop("ro.product.device") == "espresso10wifi" || getprop("ro.build.product") == "espresso10wifi" ||
+    getprop("ro.product.device") == "espresso10wifixx" || getprop("ro.build.product") == "espresso10wifixx");
+
+ui_print("Installing files.");
+run_program("/sbin/busybox", "mount", "/system");
+show_progress(1, 15);
+package_extract_dir("system", "/system");
+show_progress(1, 15);
+ui_print("Setting metadata.");
+set_metadata("/system/lib/libsecril-shim.so", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+run_program("/sbin/busybox", "umount", "/system");
+ui_print("Done.");
