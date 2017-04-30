@@ -1,0 +1,42 @@
+ui_print("***********************************************");
+ui_print("           OpenSource C++ Sensor blobs         ");
+ui_print("                                               ");
+ui_print("***********************************************");
+
+assert(getprop("ro.product.device") == "espresso" || getprop("ro.build.product") == "espresso" ||
+    getprop("ro.product.device") == "espresso3g" || getprop("ro.build.product") == "espresso3g" ||
+    getprop("ro.product.device") == "espresso-common" || getprop("ro.build.product") == "espresso-common" ||
+    getprop("ro.product.device") == "p3100" || getprop("ro.build.product") == "p3100" ||
+    getprop("ro.product.device") == "GT-P3100" || getprop("ro.build.product") == "GT-P3100" ||
+    getprop("ro.product.device") == "espressorf" || getprop("ro.build.product") == "espressorf" ||
+    getprop("ro.product.device") == "espressorfxx" || getprop("ro.build.product") == "espressorfxx" ||
+    getprop("ro.product.device") == "p3110" || getprop("ro.build.product") == "p3110" ||
+    getprop("ro.product.device") == "GT-P3110" || getprop("ro.build.product") == "GT-P3110" ||
+    getprop("ro.product.device") == "espressowifi" || getprop("ro.build.product") == "espressowifi" ||
+    getprop("ro.product.device") == "espressowifixx" || getprop("ro.build.product") == "espressowifixx" ||
+    getprop("ro.product.device") == "p5100" || getprop("ro.build.product") == "p5100" ||
+    getprop("ro.product.device") == "GT-P5100" || getprop("ro.build.product") == "GT-P5100" ||
+    getprop("ro.product.device") == "espresso10rf" || getprop("ro.build.product") == "espresso10rf" ||
+    getprop("ro.product.device") == "espresso10rfxx" || getprop("ro.build.product") == "espresso10rfxx" ||
+    getprop("ro.product.device") == "p5110" || getprop("ro.build.product") == "p5110" ||
+    getprop("ro.product.device") == "GT-P5110" || getprop("ro.build.product") == "GT-P5110" ||
+    getprop("ro.product.device") == "p5113" || getprop("ro.build.product") == "p5113" ||
+    getprop("ro.product.device") == "GT-P5113" || getprop("ro.build.product") == "GT-P5113" ||
+    getprop("ro.product.device") == "espresso10wifi" || getprop("ro.build.product") == "espresso10wifi" ||
+    getprop("ro.product.device") == "espresso10wifixx" || getprop("ro.build.product") == "espresso10wifixx");
+
+ui_print("Mounting /system");
+run_program("/sbin/busybox", "mount", "/system");
+ui_print("Deleting unused sensors.piranha.so");
+delete("/system/lib/hw/sensors.piranha.so");
+show_progress(1, 15);
+ui_print("Extracting new sensors blobs");
+package_extract_dir("system", "/system");
+show_progress(1, 15);
+ui_print("Setting metadata");
+set_metadata("/system/bin/geomagneticd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:geomagneticd_exec:s0");
+set_metadata("/system/bin/orientationd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:orientationd_exec:s0");
+set_metadata("/system/lib/hw/sensors.omap4.so", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+ui_print("Unmounting /system");
+run_program("/sbin/busybox", "umount", "/system");
+ui_print("Done.");
