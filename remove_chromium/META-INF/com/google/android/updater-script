@@ -1,0 +1,9 @@
+assert(getprop("ro.product.device") == "tuna" || getprop("ro.build.product") == "tuna" || getprop("ro.product.device") == "maguro" || getprop("ro.build.product") == "maguro" || getprop("ro.product.device") == "toro" || getprop("ro.build.product") == "toro" || getprop("ro.product.device") == "toroplus" || getprop("ro.build.product") == "toroplus" || abort("E3004: This package is for device: tuna,maguro,toro,toroplus; this device is " + getprop("ro.product.device") + "."););
+ui_print("Deleting Chromium.apk..")
+show_progress(0.750000, 0);
+mount("ext4", "EMMC", "/dev/block/platform/omap/omap_hsmmc.0/by-name/system", "/system", "");
+delete("/system/app/Chromium/Chromium.apk");
+unmount("/system");
+ui_print("Chromium.apk deleted!")
+unmount("/system");
+set_progress(1.000000);
